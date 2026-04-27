@@ -1,4 +1,6 @@
-# 🐘 PHP & MariaDB Lern-Umgebung (Docker-Edition)
+# 🐳 Docker und 🚢 Docker Compose : Anwendung
+
+## 🐘 PHP & MariaDB Lern-Umgebung (Docker-Edition)
 
 ![alt text](image.png)
 
@@ -77,3 +79,5 @@ docker compose down
 1.  Wie man **Docker Compose** für Multi-Service-Apps nutzt.
 2.  Wie man eine **PDO-Verbindung** zwischen PHP und SQL verwaltet.
 3.  Dass PHP gar nicht so "alt" ist, wenn man es mit moderner Infrastruktur kombiniert! 🚀
+
+### 👩🏻‍💻😎 Viel Spaß 👩🏻‍💻😎
