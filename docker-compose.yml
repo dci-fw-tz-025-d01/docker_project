@@ -1,0 +1,48 @@
+services:
+  # --- DATENBANK SERVICE (MariaDB) ---
+  # Zeigt: Wie man ein fertiges Image aus einer Registry nutzt.
+  db:
+    image: mariadb:lts
+    restart: always
+    environment:
+      # Diese Variablen konfigurieren die Datenbank beim allerersten Start
+      MYSQL_DATABASE: studis_db
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_USER: studi_user
+      MYSQL_PASSWORD: studi_password
+    volumes:
+      - db_data:/var/lib/mysql # PERSISTENZ: Daten überleben das Löschen des Containers
+
+  # --- WEB SERVER SERVICE (PHP + Apache) ---
+  # Zeigt: Wie man ein eigenes Image (aus dem Dockerfile) baut.
+  web:
+    build: . # Nutzt das Dockerfile im gleichen Ordner
+    container_name: php_lern_umgebung
+    ports:
+      - "8080:80" # Port-Mapping: Außen (Browser) -> Innen (Container)
+    volumes:
+      - ./src:/var/www/html # HOT-RELOAD: Code-Änderungen lokal sind sofort im Container aktiv
+    depends_on:
+      - db # ORCHESTRIERUNG: Startreihenfolge festlegen
+    environment:
+      # Praktisch, um die DB-Daten nicht im PHP-Code hart zu codieren
+      DB_HOST: db
+      DB_NAME: studis_db
+
+  # --- DATENBANK-VERWALTUNG (phpMyAdmin) ---
+  # Zeigt: Wie einfach man Infrastruktur-Tools hinzufügen kann.
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    ports:
+      - "8081:80" # Erreichbar unter http://localhost:8081
+    environment:
+      PMA_HOST: db # INTERNE KOMMUNIKATION: Container finden sich über den Service-Namen
+      MYSQL_ROOT_PASSWORD: root_password
+    depends_on:
+      - db
+
+# --- VOLUMES ---
+# Definiert benannte Speicherbereiche, die unabhängig von Containern existieren.
+volumes:
+  db_data:
