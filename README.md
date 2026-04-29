@@ -2,7 +2,7 @@
 
 ![alt text](image.png)
 
-### 🎯 Der Zweck dieser Übung: "The Fullstack Bridge"
+### Setup für PHP
 
 Warum machen wir das? In der modernen Softwareentwicklung geht es nicht nur darum, Code zu schreiben, sondern **Infrastrukturen zu verstehen**.
 
@@ -12,7 +12,7 @@ In dieser Übung lernst du:
 - **Persistent Storage:** Wie Daten "überleben", auch wenn der Server gelöscht wird.
 - **Real-time Dev:** Wie Docker-Volumes deinen Code live vom Editor in den Container spiegeln.
 
-**Das Ziel:** Du baust heute keine einfache Website, sondern steuerst ein kleines Rechenzentrum auf deinem eigenen Laptop.
+**Das Ziel:** Du baust heute eine einfache Website, sondern steuerst ein kleines Rechenzentrum auf deinem eigenen Laptop.
 
 ---
 
@@ -27,6 +27,17 @@ Wir nutzen **Docker**, um eine isolierte Umgebung zu schaffen. Kein "Aber bei mi
     ```bash
     docker compose up -d --build
     ```
+    
+Nur wenn du den **Dockerfile** änderst, denn Docker das Image neu bauen muss.
+
+**Zum Beispiel:**
+
+- neue PHP Extension installieren
+- Apache Konfiguration ändern
+- Composer im Image installieren
+- Systempakete hinzufügen
+  
+    
 3.  Prüfe deine "Infrastruktur":
     - **Frontend (PHP):** [http://localhost:8080](http://localhost:8080)
     - **Database Management (phpMyAdmin):** [http://localhost:8081](http://localhost:8081)
@@ -71,11 +82,68 @@ docker compose down
 > **Pro-Tipp für Studis:** Obwohl die Container (die "Maschinen") gelöscht werden, bleiben deine Daten im sogenannten **Volume** sicher gespeichert. Starte morgen neu und alles ist noch da. Das ist echte Persistenz!
 
 ---
+## 5. Wann brauchst du `docker compose restart`?
+**Zum Beispiel wenn:**
+
+- Environment Variables geändert wurden
+- Apache neu geladen werden soll
+- Services hängen geblieben sind
+
+Dann:
+
+```bash 
+docker compose restart
+```
+
+### Datenbank bleibt erhalten?
+
+#### Ja 
+
+Weil du das hast:
+
+```yaml
+volumes:
+  - db_data:/var/lib/mysql
+```
+
+Das bedeutet:
+
+Deine MariaDB Daten bleiben gespeichert, auch wenn Container gestoppt werden.
+
+---
+## Typischer Arbeitsablauf
+
+### Morgens starten
+
+```bash 
+docker compose up -d
+```
+
+→ Container laufen im Hintergrund
+→ Terminal bleibt frei
+
+---
+
+### Dann entwickeln
+
+```text 
+VS Code öffnen
+PHP schreiben
+Browser testen
+phpMyAdmin prüfen
+```
+
+---
+
+### Abends stoppen
+
+```bash id="rt7b1q"
+docker compose down
+```
+
+---
 
 ### Was du jetzt gelernt hast:
 
-1.  Wie man **Docker Compose** für Multi-Service-Apps nutzt.
-2.  Wie man eine **PDO-Verbindung** zwischen PHP und SQL verwaltet.
-3.  Dass PHP gar nicht so "alt" ist, wenn man es mit moderner Infrastruktur kombiniert! 🚀
 
 ### 😎 Viel Spaß 👩🏻‍💻
