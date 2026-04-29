@@ -143,7 +143,6 @@ docker compose down
 
 ---
 
-### Was du jetzt gelernt hast:
 
 
 ### 😎 Viel Spaß 👩🏻‍💻
