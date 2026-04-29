@@ -64,10 +64,6 @@ Du kommst aus der JavaScript/TS-Welt? Dann wird dir auffallen: PHP ist wie "Java
 
 Öffne `src/index.php` und experimentiere:
 
-- **Hot Reloading:** Ändere die Variable `$titel`. Speichere. Der Browser zeigt es sofort – ohne Rebuild!
-- **Struktur:** PHP-Arrays fühlen sich an wie JS-Objekte. Erstelle einen User:
-  `$user = ["name" => "Coding-Hero", "status" => "learning"];`
-- **Output:** Gib den User im HTML aus: `echo $user['name'];`
 
 ---
 
