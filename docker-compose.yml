@@ -28,6 +28,8 @@ services:
       # Praktisch, um die DB-Daten nicht im PHP-Code hart zu codieren
       DB_HOST: db
       DB_NAME: studis_db
+      DB_USER: studi_user
+      DB_PASSWORD: studi_password
 
   # --- DATENBANK-VERWALTUNG (phpMyAdmin) ---
   # Zeigt: Wie einfach man Infrastruktur-Tools hinzufügen kann.
